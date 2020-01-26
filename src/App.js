@@ -10,6 +10,7 @@ class Menu extends React.Component{
         this.state ={
             clicksUr: null,
             clicksC: null,
+            color: 'blue'
         }
     }
     selectMenu(){
@@ -125,30 +126,7 @@ class Square extends React.Component {
         super(props);
         this.pickColor = this.pickColor.bind(this)
         this.setNewColor = this.setNewColor.bind(this)
-        // let bgColors = {
-        //     default: null,
-        //     blue: "#00B1E1",
-        // }
-        this.state = {
-            // bgColors: "#00B1E1"
-        };
-
-        // let randomSquare = square[Math.floor(Math.random() * square.length)];
-
-
-        // this.interval = setInterval(() => {
-        //     let bgColors = {
-        //         default: null,
-        //         blue: "#00B1E1",
-        //     }
-        //     let randomColor = bgColors[
-        //         Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
-        //         // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
-        //         // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
-        //
-        //         ];
-        //     this.setState(() => ({bgColor: randomColor}))
-        // }, 900);
+        this.state = {};
     }
 
     componentWillUnmount() {
@@ -168,9 +146,6 @@ class Square extends React.Component {
             }
             let randomColor = bgColors[
                 Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
-                // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
-                // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
-
                 ];
             this.setState(() => ({bgColor: randomColor}))
         }, 900);
@@ -189,16 +164,10 @@ class Square extends React.Component {
                         border: "1px solid black",
                         height: "34px",
                         width: "34px",
-                    }}
-                    onClick={this.setNewColor}
-                    // onClick={this.pickColor}
-                    // onClick={() => this.style.background("blue")}
-                >
-                    {/*{this.props.value}*/}
+                    }} onClick={this.setNewColor}>
                 </button>
             </>
             // </div>
-
         );
     }
 }
@@ -211,8 +180,16 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.state ={
-            squares:3,
+            squares: 3,
+            value: '',
         }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleStart = this.handleStart.bind(this);
+
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
     }
 
     createSquares(i){
@@ -222,13 +199,37 @@ class Board extends React.Component {
         }
         return squares;
         // return <Square/>
+        // return <button onClick={Square}>jjjjj</button>
     }
+
+    handleStart() {
+        // // start timer after button is clicked
+        // this.interval = setInterval(() => {
+        //     this.setState(prevState => ({
+        //         seconds: prevState.seconds + 1
+        //     }));
+        // }, 1000);
+        // var bgColors = {
+        //     // default: null,
+        //     blue: "#00B1E1",
+        // }
+        this.interval = setInterval(() => {
+            this.setState({
+                bgColor: '#3CB371',
+                isToggleOn: true
+            })
+        },1000);
+    }
+
 
     render() {
         // const status = 'Next player: X';
         return (
-            <div>
-                {/*<div className="status">{status}</div>*/}
+            <div style={{
+                marginLeft: '350px',
+            }}>
+                <input type="text" value={this.state.value} onChange={this.handleChange} /><button onClick={this.handleStart} style={{backgroundColor:this.state.bgColor}}>{this.state.isToggleOn ? 'Play Again' : 'Play'}</button>
+                <p></p>
                 <div className="board-row">
                     {this.createSquares(0)}
                 </div>
@@ -238,7 +239,6 @@ class Board extends React.Component {
                 <div className="board-row">
                     {this.createSquares(2)}
                 </div>
-                <button onClick={this.props.setNewColor}>ddddd {this.props.se}</button>
             </div>
             // <div>
             //     <div className="status">{status}</div>
@@ -279,7 +279,9 @@ class LeaderList extends React.Component{
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{
+                marginLeft: '350px',
+            }}>
                 <div className="col-xs-12">
                     <h1>Leader List</h1>
                     {this.state.todos.map((todo) => (
@@ -304,6 +306,7 @@ class Counter extends React.Component {
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleStart = this.handleStart.bind(this);
+        // this.props.setNewColor = this.props.setNewColor.bind(this);
 
     };
 
@@ -335,16 +338,16 @@ class Counter extends React.Component {
     }
 
     handleColorSquares(){
-        let bgColors = {
-            default: null,
-            blue: "#00B1E1",
-        };
-        let randomColor = bgColors[
-            Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
-            // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
-            // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
-
-            ];
+        // let bgColors = {
+        //     default: null,
+        //     blue: "#00B1E1",
+        // };
+        // let randomColor = bgColors[
+        //     Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+        //     // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
+        //     // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+        //
+        //     ];
     }
 
     componentWillUnmount() {
@@ -359,7 +362,7 @@ class Counter extends React.Component {
                 <button>{this.state.count}</button>
                 {/*Seconds: {this.state.seconds}*/}
                 <button onClick={this.handleStart} style={{backgroundColor:this.state.bgColor}}>{this.state.isToggleOn ? 'Play Again' : 'Play'}</button>
-                <button className="square" onClick={this.handleColorSquares} style={{backgroundColor:this.state.bgColor}}>hi</button>
+                <button className="square" onClick={this.setNewColor} style={{backgroundColor:this.state.bgColor}}>hi</button>
 
             </div>
         )
