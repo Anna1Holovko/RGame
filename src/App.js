@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
 // import logo from './logo.svg';
 import './App.css';
 import Dropdown from 'react-dropdown'
-
 
 class Menu extends React.Component{
     constructor() {
@@ -30,85 +28,177 @@ class Menu extends React.Component{
     }
 }
 
+
+// class Square extends React.Component{
+//     constructor(props) {
+//         super(props);
+//         // var boxes = [];
+//         // const numBoxes = 24;
+//         // this.state = {boxes};
+//         // const style = {
+//         //     width: '100px',
+//         //     height: '100px',
+//         //     display: 'inline-block',
+//         //     backgroundColor: "blue"
+//         // };
+//     }
+//
+//     render() {
+//         const boxes = this.state.boxes.map(b =>
+//             <Box key={b.id} color={b.color} />
+//         );
+//         return (
+//             <div className="App">
+//                 {boxes}
+//             </div>
+//         );
+//     }
+// }
+
+// class Box extends React.Component{
+//     constructor(props) {
+//         super(props);
+//         var boxes = [];
+//         // let allColors = "#00B1E1"
+//
+//         const numBoxes = 24;
+//         // for (var i = 0; i < numBoxes; i++) {
+//         //     // let randomColor = this.getRandomColor();
+//         //     boxes.push({
+//         //         id: i,
+//         //         color: 'blue',
+//         //     });
+//         // }
+//         this.state = {boxes};
+//
+//
+//
+//
+//         // setInterval(() => {
+//         //   const newBoxes = this.state.boxes.slice();
+//         //   const randomBoxIndex = Math.floor(Math.random() * newBoxes.length);
+//         //   newBoxes[randomBoxIndex] = Object.assign({}, newBoxes[randomBoxIndex],
+//         //                               {color: this.getRandomColor()});
+//         //   this.setState({
+//         //     boxes: newBoxes
+//         //   })
+//         // }, 1000);
+//
+//     }
+//
+//     getRandomColor() {
+//       let colorIndex = Math.floor(Math.random() * this.props.allColors.length);
+//       return this.props.allColors[colorIndex];
+//     }
+//
+//
+//
+//     render() {
+//         const boxes = this.state.boxes.map(b =>
+//             <Box key={b.id} color={b.color} />
+//         );
+//         const style = {
+//             width: '100px',
+//             height: '100px',
+//             display: 'inline-block',
+//             border:'1px solid black',
+//             backgroundColor: 'white'
+//         };
+//         return (
+//             <div>
+//         <div style={style}></div>
+//                 <div className="App">{boxes}</div>
+//             </div>
+//         );
+//     }
+// }
+
+
+
+
+
+
+
+
 class Square extends React.Component {
     constructor(props) {
         super(props);
         this.pickColor = this.pickColor.bind(this)
         this.setNewColor = this.setNewColor.bind(this)
-        let bgColors = {
-            default: "#81b71a",
-            blue: "#00B1E1",
-            // cyan: "#37BC9B",
-            // green: "#8CC152",
-            // red: "#E9573F",
-            // yellow: "#F6BB42",
-        }
+        // let bgColors = {
+        //     default: null,
+        //     blue: "#00B1E1",
+        // }
         this.state = {
-            // randomcolor: null,
-            // square:6,
-
+            // bgColors: "#00B1E1"
         };
 
-        this.interval = setInterval(() => {
-            let randomColor = bgColors[
-                Object.keys(bgColors)[
-                    Math.floor(Math.random() *
-                        Object.keys(bgColors).length)
-                    ]
-                ];
-            this.setState(() => ({bgColor: randomColor}))
-        }, 2000);
+        // let randomSquare = square[Math.floor(Math.random() * square.length)];
+
+
+        // this.interval = setInterval(() => {
+        //     let bgColors = {
+        //         default: null,
+        //         blue: "#00B1E1",
+        //     }
+        //     let randomColor = bgColors[
+        //         Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+        //         // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
+        //         // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+        //
+        //         ];
+        //     this.setState(() => ({bgColor: randomColor}))
+        // }, 900);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval)
     }
 
-
-
-    // componentDidMount () {
-    //     this.setColor()
-    //     // this.initialColor()
-    // }
-
     pickColor () {
-        // let newColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')'
-        // let newColor = "white"
-        // setTimeout()
-        // let picknewColor = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')'
         let picknewColor ="red"
-        // setInterval(randomize, 2000)
         this.setState({color: picknewColor})
-        // this.setState({color:picknewColor})
     }
 
-    setNewColor(){
-        // let randomSquare = 'rgb(' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ',' + (Math.floor(Math.random() * 256)) + ')'
-        // this.setState({color: randomSquare})
-        // setInterval(this.pickColor, 1000)
+    setNewColor(props){
+        this.interval = setInterval(() => {
+            let bgColors = {
+                default: null,
+                blue: "#00B1E1",
+            }
+            let randomColor = bgColors[
+                Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+                // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
+                // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
 
+                ];
+            this.setState(() => ({bgColor: randomColor}))
+        }, 900);
     }
 
     render() {
         return (
-            // <div id="squaresContainer" className="container">
-            //     {this.createSquares(1)}
+            // <div>
+            <>
+                {/*<button onClick={this.setNewColor}>gggggg</button>*/}
+                <button
+                    className="square"
+                    style={{
+                        // backgroundColor: this.state.color,
+                        backgroundColor: this.state.bgColor,
+                        border: "1px solid black",
+                        height: "34px",
+                        width: "34px",
+                    }}
+                    onClick={this.setNewColor}
+                    // onClick={this.pickColor}
+                    // onClick={() => this.style.background("blue")}
+                >
+                    {/*{this.props.value}*/}
+                </button>
+            </>
             // </div>
-            <button
-                className="square"
-                style={{
-                    // backgroundColor: this.state.color,
-                    backgroundColor: this.state.bgColor,
-                    border: "1px solid black",
-                    height: "34px",
-                    width: "34px",
-                }}
-                // onLoad={this.setNewColor}
-                   // onClick={this.pickColor}
-                // onClick={() => this.style.background("blue")}
-            >
-                {/*{this.props.value}*/}
-            </button>
+
         );
     }
 }
@@ -120,66 +210,19 @@ class Board extends React.Component {
 
     constructor(props) {
         super(props);
-        // let bgColors = {
-        //     default: "#81b71a",
-        //     blue: "#00B1E1",
-        //     // cyan: "#37BC9B",
-        //     // green: "#8CC152",
-        //     // red: "#E9573F",
-        //     // yellow: "#F6BB42",
-        // }
         this.state ={
             squares:3,
-            // randcolor:"blue"
         }
-        // this.interval = setInterval(() => {
-        //     let randomColor = bgColors[
-        //         Object.keys(bgColors)[
-        //             Math.floor(Math.random() *
-        //                 Object.keys(bgColors).length)
-        //             ]
-        //         ];
-        //     this.setState(() => ({bgColor: randomColor}))
-        // }, 2000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval)
     }
 
     createSquares(i){
-        let bgColors = {
-            default: "#81b71a",
-            blue: "#00B1E1",
-            // cyan: "#37BC9B",
-            // green: "#8CC152",
-            // red: "#E9573F",
-            // yellow: "#F6BB42",
-        }
         let squares = [];
         for (let i = 0; i < this.state.squares; i++) {
             squares.push(<Square color={this.props.color} key={i} />);
         }
-
-        this.interval = setInterval(() => {
-            let randomColor = bgColors[
-                Object.keys(bgColors)[
-                    Math.floor(Math.random() *
-                        Object.keys(bgColors).length)
-                    ]
-                ];
-            this.setState(() => ({bgColor: randomColor}))
-        }, 2000);
         return squares;
         // return <Square/>
     }
-    //
-    // randomize(){
-    //     let randomSquare = this.state.squares[Math.floor(Math.random() * this.state.squares)]
-    //     this.setState({color:randomSquare})
-    //     return randomSquare;
-    // }
-
 
     render() {
         // const status = 'Next player: X';
@@ -195,6 +238,7 @@ class Board extends React.Component {
                 <div className="board-row">
                     {this.createSquares(2)}
                 </div>
+                <button onClick={this.props.setNewColor}>ddddd {this.props.se}</button>
             </div>
             // <div>
             //     <div className="status">{status}</div>
@@ -251,6 +295,77 @@ class LeaderList extends React.Component{
     }
 }
 
+class Counter extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            count: 0,
+            seconds: 0,
+        }
+        this.handleClick = this.handleClick.bind(this);
+        this.handleStart = this.handleStart.bind(this);
+
+    };
+
+
+    handleClick () {
+        this.setState((prevState, { count }) => ({
+            count: prevState.count + 1
+        }));
+
+    };
+
+    handleStart() {
+        // // start timer after button is clicked
+        // this.interval = setInterval(() => {
+        //     this.setState(prevState => ({
+        //         seconds: prevState.seconds + 1
+        //     }));
+        // }, 1000);
+        // var bgColors = {
+        //     // default: null,
+        //     blue: "#00B1E1",
+        // }
+        this.interval = setInterval(() => {
+            this.setState({
+                bgColor: '#3CB371',
+                isToggleOn: true
+            })
+        },1000);
+    }
+
+    handleColorSquares(){
+        let bgColors = {
+            default: null,
+            blue: "#00B1E1",
+        };
+        let randomColor = bgColors[
+            Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+            // map.get(bgColors)[Math.floor(Math.random() * map.get(bgColors).length)]
+            // Object.keys(bgColors)[Math.floor(Math.random() * Object.keys(bgColors).length)]
+
+            ];
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.handleClick}></button>
+                <button>{this.state.count}</button>
+                {/*Seconds: {this.state.seconds}*/}
+                <button onClick={this.handleStart} style={{backgroundColor:this.state.bgColor}}>{this.state.isToggleOn ? 'Play Again' : 'Play'}</button>
+                <button className="square" onClick={this.handleColorSquares} style={{backgroundColor:this.state.bgColor}}>hi</button>
+
+            </div>
+        )
+    }
+}
+
 
 class App extends React.Component {
     render() {
@@ -261,7 +376,9 @@ class App extends React.Component {
                     <Board />
                     <LeaderList/>
                     {/*<SquaresContainer/>*/}
-                    {/*<Square/>*/}
+                    {/*<Square />*/}
+                    <Counter/>
+                    {/*<Box/>*/}
 
                 </div>
                 <div className="game-info">
